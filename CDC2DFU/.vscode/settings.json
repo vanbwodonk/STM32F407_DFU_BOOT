@@ -1,0 +1,43 @@
+{
+    "files.associations": {
+        "stm32f4xx_hal.h": "c",
+        "insr1.h": "c"
+    },
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}",
+    "editor.formatOnSave": true,
+    "run": {
+        "defaultColor": "black", // Can also use string color names.
+        "commands": [
+            {
+                "name": "Make",
+                "color": "black",
+                "command": "make",
+            },
+            {
+                "name": "Upload",
+                "color": "black",
+                "command": "make upload",
+            },
+            {
+                "name": "DFU Upload",
+                "color": "black",
+                "command": "make dfuupload",
+            },
+            {
+                "name": "Jump DFU",
+                "color": "black",
+                "command": "make jumpboot",
+            },
+            {
+                "name": "Clean",
+                "color": "black",
+                "command": "make clean",
+            },
+            {
+                "name": "Run Terminal",
+                "color": "black",
+                "command": "make terminal",
+            }
+        ]
+    }
+}
