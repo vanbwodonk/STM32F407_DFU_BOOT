@@ -69,7 +69,6 @@ Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c
 
 # ASM sources
 ASM_SOURCES =  \
-Src/sysROM.s \
 startup_stm32f407xx.s
 
 

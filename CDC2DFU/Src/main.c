@@ -68,6 +68,18 @@ void SystemClock_Config(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
+void JumpToBootloader(void) {
+    void (*SysMemBootJump)(void);
+
+    __HAL_RCC_SYSCFG_CLK_ENABLE();           //make sure syscfg clocked
+    __HAL_SYSCFG_REMAPMEMORY_SYSTEMFLASH();  //remap system memory to address 0x0000000
+    SCB->VTOR = 0;                           //set vector table offset to 0
+
+    SysMemBootJump = (void (*)(void))(*((uint32_t*)(4)));
+    __set_MSP(*(uint32_t*)(0));
+
+    SysMemBootJump();
+}
 void lowDplus(void) {
     GPIO_InitTypeDef GPIO_InitStruct;
     GPIO_InitStruct.Pin = GPIO_PIN_12;
@@ -79,7 +91,6 @@ void lowDplus(void) {
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
     HAL_Delay(150);
 }
-extern void enterSysROM(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
@@ -98,7 +109,7 @@ int main(void) {
     __BKPSRAM_CLK_ENABLE();
     if (*(__IO uint8_t*)0x40024000 == 212) {  //is magic number correct?
         *(__IO uint8_t*)0x40024000 = 0;
-        enterSysROM();  //jump to system memory bootloader
+        JumpToBootloader();
     }
     /* USER CODE END 1 */
 
